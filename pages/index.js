@@ -1,9 +1,11 @@
+import WarningNotification from "../components/ui/notfications/WarningNotification";
+
 export default function Home() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline ">
-        Hello Next.js
-      </h1>
+      <WarningNotification>
+        Random Notification!
+      </WarningNotification>
     </div>
   )
 }
