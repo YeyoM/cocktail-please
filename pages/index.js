@@ -1,11 +1,14 @@
-import WarningNotification from "../components/ui/notfications/WarningNotification";
+import { Fragment } from 'react'
+import RandomCocktailBtn from '../components/ui/buttons/randomCocktailBtn'
+import CocktailCard from '../components/cocktailCard/cocktailCard'
 
 export default function Home() {
   return (
-    <div>
-      <WarningNotification>
-        Random Notification!
-      </WarningNotification>
-    </div>
+    <Fragment>
+      <CocktailCard />
+      <RandomCocktailBtn>
+        Random Cocktail
+      </RandomCocktailBtn>
+    </Fragment>
   )
 }
