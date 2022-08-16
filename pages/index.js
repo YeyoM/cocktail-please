@@ -1,10 +1,10 @@
 import { Fragment } from 'react'
-import SignupForm from '../components/signupForm/SignupForm'
+import Landing from '../components/landing/landing'
 
 export default function Home() {
   return (
     <Fragment>
-      <SignupForm />
+      <Landing />
     </Fragment>
   )
 }

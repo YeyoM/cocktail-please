@@ -1,4 +1,5 @@
 import SuccessBtn from '../ui/buttons/successBtn'
+import Link from 'next/link'
 
 export default function LoginForm() {
   return (
@@ -11,7 +12,12 @@ export default function LoginForm() {
         </div>
         <div className="flex flex-col">
           <label htmlFor="password" className="text-white text-lg">Password</label>
-          <input placeholder="password here..." type="password" id="password" className="mb-8 w-full p-1 border border-white rounded-md" />
+          <input placeholder="password here..." type="password" id="password" className="mb-1 w-full p-1 border border-white rounded-md" />
+        </div>
+        <div className="flex flex-col mb-4">
+          <Link href="/signup">
+            <a className="text-white text-md">Create a new account here</a>
+          </Link>
         </div>
         <div className="flex flex-col items-center">
           <SuccessBtn>Login</SuccessBtn>
