@@ -1,10 +1,10 @@
 import { Fragment } from 'react'
-import SignupForm from '../components/signupForm/SignupForm'
+import SignUpForm from '../components/signupForm/SignUpForm'
 
 export default function Signup() {
   return (
     <Fragment>
-      <SignupForm />
+      <SignUpForm />
     </Fragment>
   )
 }
