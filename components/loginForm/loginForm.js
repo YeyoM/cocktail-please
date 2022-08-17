@@ -13,11 +13,11 @@ export default function LoginForm() {
           <h1 className="text-white text-5xl mt-10 mb-12">Login to your account</h1>
           <div className="flex flex-col">
             <label htmlFor="email" className="text-white text-2xl mb-1">Email</label>
-            <input placeholder="Email here..." type="email" id="email" className="mb-4 w-full p-1 border border-white rounded-md" />
+            <input placeholder="Email here..." type="email" id="email" className="mb-4 w-full p-1 border border-white rounded-md focus:outline-white"/>
           </div>
           <div className="flex flex-col">
             <label htmlFor="password" className="text-white text-2xl mb-1">Password</label>
-            <input placeholder="Password here..." type="password" id="password" className=" w-full p-1 border border-white rounded-md" />
+            <input placeholder="Password here..." type="password" id="password" className=" w-full p-1 border border-white rounded-md focus:outline-white"/>
           </div>
           <div className="flex flex-col mb-4">
             <Link href="/signup">
