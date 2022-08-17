@@ -18,6 +18,9 @@ export default function Landing() {
           <li className="pt-1 text-orange-300 text-lg w-fit hover:text-white ease-in duration-200">
             <Link href="/about">About</Link>
           </li>
+          <li className="pt-1 text-orange-300 text-lg w-fit hover:text-white ease-in duration-200">
+            <Link href="/disclaimer">Disclaimer</Link>
+          </li>
         </ul>
       </div>
     </Fragment>
