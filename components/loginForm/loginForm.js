@@ -1,6 +1,6 @@
 import SuccessBtn from '../ui/buttons/successBtn'
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { useAuth } from '../context/authContext'
 
 export default function LoginForm() {
@@ -14,10 +14,15 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // checar que el email y el password no estén vacíos
+
     try {
       setError('')
       setLoading(true)
       await login(email, password)
+      // mostrar un mensaje de que se ha iniciado sesion
+      // redirigir a la página de inicio
     } catch (err) {
       console.log(err)
       setError('Failed to log in')

@@ -17,10 +17,17 @@ export default function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // checar que el email, nombre y el password no estén vacíos
+    // checar que el usuario acepte los términos y condiciones
+    // checar que el usuario sea mayor de edad
+
     try {
       setError('')
       setLoading(true)
       await signUp(email, password)
+      // mostrar un mensaje de que se ha creado la cuenta
+      // redirigir a la página de login
     } catch (err) {
       console.log(err)
       setError('Failed to create an account')
