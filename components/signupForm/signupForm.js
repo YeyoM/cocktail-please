@@ -1,11 +1,16 @@
 import SuccessBtn from '../ui/buttons/successBtn'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Fragment, useEffect, useState } from 'react'
 import { useAuth } from '../context/authContext'
+import DangerNotification from '../ui/notfications/dangerNotification'
+import SuccessNotification from '../ui/notfications/successNotification'
+import LoadingNotification from '../ui/notfications/loadingNotification'
 
 export default function SignUpForm() {
 
   const { user, signUp } = useAuth()
+  const router = useRouter()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -13,26 +18,63 @@ export default function SignUpForm() {
   const [agreeTerms, setAgreeTerms] = useState(false)
   const [isOver18, setIsOver18] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // checar que el email, nombre y el password no estén vacíos
-    // checar que el usuario acepte los términos y condiciones
-    // checar que el usuario sea mayor de edad
+    if (!name || !email || !password) {
+      setInterval(() => {
+        setError('')
+      }, 5000)
+      return setError('Please fill in all fields')
+    }
+
+    if (password.length < 6) {
+      setInterval(() => {
+        setError('')
+      }, 5000)
+      return setError('Password must be at least 6 characters')
+    }
+    
+    if (!agreeTerms) {
+      setInterval(() => {
+        setError('')
+      }, 5000)
+      return setError('You must agree to the terms and conditions')
+    }
+
+    if (!isOver18) {
+      setInterval(() => {
+        setError('')
+      }, 5000)
+      return setError('You must be over 18 to sign up')
+    }
 
     try {
       setError('')
       setLoading(true)
       await signUp(email, password)
-      // mostrar un mensaje de que se ha creado la cuenta
       // redirigir a la página de login
     } catch (err) {
       console.log(err)
+      setInterval(() => {
+        setError('')
+      }, 5000)
       setError('Failed to create an account')
     }
     setLoading(false)
+    setSuccess('Account created successfully')
+    setInterval(() => {
+      setSuccess('')
+    }, 3000)
+    setName('')
+    setEmail('')
+    setPassword('')
+    setAgreeTerms(false)
+    setIsOver18(false)
+    router.push('/login')
   }
 
   const handleNameChange = (e) => {
@@ -57,9 +99,12 @@ export default function SignUpForm() {
 
   return (
     <Fragment>
-      <div className="flex self-start ml-12 mt-8 text-white text-lg">
+      <div className="flex self-start ml-12 mt-2 text-white text-lg">
         <Link href="/">{`< Return`}</Link>
       </div>
+      {error && <DangerNotification>{error}</DangerNotification>}
+      {success && <SuccessNotification>{success}</SuccessNotification>}
+      {loading && <LoadingNotification>Loading...</LoadingNotification>}
       <div className="max-h-full min-h-fit w-5/6 mt-8 mb-8 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
         <form className="w-3/4" onSubmit={handleSubmit}>
           <h1 className="text-white text-5xl mt-10 mb-12">Create a new Account</h1>
@@ -92,7 +137,7 @@ export default function SignUpForm() {
               By checking this, you confirm that you are over 18 years old
             </label>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mb-4">
             <SuccessBtn>Login</SuccessBtn>
           </div>
         </form>
