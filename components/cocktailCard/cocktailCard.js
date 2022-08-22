@@ -1,9 +1,22 @@
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { useRouter } from 'next/router'
+import { useAuth } from '../context/authContext'
+import { doc, setDoc } from "firebase/firestore"
+import { db } from '../../config/firebase'
 
 const exampleResponse = require('../../public/exampleCocktail.json')
 
 export default function CocktailCard() {
+
+  const { user } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login')
+    }
+  }, [user, router])
 
   const [cocktail, setCocktail] = useState(exampleResponse.drinks[0])
   const [ingredients, setIngredients] = useState([])
@@ -83,8 +96,6 @@ export default function CocktailCard() {
     setIngredients(newIngredients)
     setMeasures(newMeasurements)
   }, [cocktail])
-
-  console.log(measures)
 
   return (
     <div className="max-h-full min-h-fit w-4/5 mt-8 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">

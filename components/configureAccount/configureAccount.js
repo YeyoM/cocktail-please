@@ -1,21 +1,34 @@
-import { Fragment, useState } from "react"
+import { Fragment, useState, useEffect } from "react"
 import SuccessBtn from "../ui/buttons/successBtn"
 import DangerNotification from '../ui/notfications/dangerNotification'
 import SuccessNotification from '../ui/notfications/successNotification'
 import LoadingNotification from '../ui/notfications/loadingNotification'
+import { useRouter } from 'next/router'
+import { useAuth } from '../context/authContext'
+import { doc, setDoc } from "firebase/firestore"
+import { db } from '../../config/firebase'
 
 export default function ConfigureAccount() {
+
+  const { user } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login')
+    }
+  }, [user, router])
 
   const [day, setDay] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)  
 
   const handleDayChange = (e) => {
     setDay(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!day) {
@@ -25,8 +38,26 @@ export default function ConfigureAccount() {
       }, 5000)
       return
     }
-
-    console.log(day)
+  
+    try {
+      setError('')
+      setLoading(true)
+      await setDoc(doc(db, 'users', user.uid), {
+        day
+      }, { merge: true })
+      setLoading(false)
+      setSuccess('Day saved')
+      setInterval(() => {
+        setSuccess('')
+      }, 5000)
+      router.push('/random')
+    } catch (error) {
+      setError(error.message)
+      setInterval(() => {
+        setError('')
+      }, 5000)
+    }
+    
   }
 
   return (

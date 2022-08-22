@@ -75,7 +75,7 @@ export default function SignUpForm() {
       }, 3000)
       // Redirigir a la pagina donde se muestra el perfil del usuario
       // y ademas va a configurar su cuenta
-      router.push('/login')
+      router.push('/configure')
     } catch (err) {
       console.log(err)
       setInterval(() => {
