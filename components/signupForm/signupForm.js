@@ -1,15 +1,17 @@
 import SuccessBtn from '../ui/buttons/successBtn'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useAuth } from '../context/authContext'
+import { doc, setDoc } from "firebase/firestore"
+import { db } from '../../config/firebase'
 import DangerNotification from '../ui/notfications/dangerNotification'
 import SuccessNotification from '../ui/notfications/successNotification'
 import LoadingNotification from '../ui/notfications/loadingNotification'
 
 export default function SignUpForm() {
 
-  const { user, signUp } = useAuth()
+  const { signUp } = useAuth()
   const router = useRouter()
 
   const [name, setName] = useState('')
@@ -55,8 +57,25 @@ export default function SignUpForm() {
     try {
       setError('')
       setLoading(true)
-      await signUp(email, password)
-      // redirigir a la página de login
+      const user = await signUp(email, password)
+      await setDoc(doc(db, "users", user.user.uid), {
+        name: name,
+        email: email,
+        password: password,
+        randomCocktailDay: '',
+        currentCocktail: '',
+        nextCocktail: '',
+        isAdmin: false,
+        isBanned: false,
+      })
+      setLoading(false)
+      setSuccess('Account created successfully')
+      setInterval(() => {
+        setSuccess('')
+      }, 3000)
+      // Redirigir a la pagina donde se muestra el perfil del usuario
+      // y ademas va a configurar su cuenta
+      router.push('/login')
     } catch (err) {
       console.log(err)
       setInterval(() => {
@@ -65,16 +84,6 @@ export default function SignUpForm() {
       setError('Failed to create an account')
     }
     setLoading(false)
-    setSuccess('Account created successfully')
-    setInterval(() => {
-      setSuccess('')
-    }, 3000)
-    setName('')
-    setEmail('')
-    setPassword('')
-    setAgreeTerms(false)
-    setIsOver18(false)
-    router.push('/login')
   }
 
   const handleNameChange = (e) => {
