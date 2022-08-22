@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { useRouter } from 'next/router'
 import { useAuth } from '../context/authContext'
-import { doc, setDoc } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
 
 const exampleResponse = require('../../public/exampleCocktail.json')
@@ -15,6 +15,17 @@ export default function CocktailCard() {
   useEffect(() => {
     if (!user) {
       router.push('/login')
+    } else {
+      let day = ''
+      const userDoc = getDoc(doc(db, 'users', user.uid))
+      userDoc.then((doc) => {
+        day = doc._document.data.value.mapValue.fields.day.stringValue
+        if (!day) {
+          router.push('/configure')
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }, [user, router])
 

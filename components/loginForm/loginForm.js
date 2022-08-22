@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '../context/authContext'
-import { doc, setDoc } from "firebase/firestore"
+import { doc, setDoc, getDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
 import DangerNotification from '../ui/notfications/dangerNotification'
 import SuccessNotification from '../ui/notfications/successNotification'
@@ -18,11 +18,11 @@ export default function LoginForm() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // checar que el email y el password no estén vacíos
     if (!email || !password) {
       setError('Please fill in all fields')
       setInterval(() => {
@@ -34,7 +34,7 @@ export default function LoginForm() {
     try {
       setError('')
       setLoading(true)
-      const user = await login(email, password)
+      await login(email, password)
       setLoading(false)
       setSuccess('Account created successfully')
       setInterval(() => {
