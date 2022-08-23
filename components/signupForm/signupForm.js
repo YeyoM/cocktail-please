@@ -109,7 +109,7 @@ export default function SignUpForm() {
   return (
     <Fragment>
       <div className="flex self-start ml-12 mt-2 text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
-        <Link href="/">{`< Return`}</Link>
+        <Link href="/">Return</Link>
       </div>
       {error && <DangerNotification>{error}</DangerNotification>}
       {success && <SuccessNotification>{success}</SuccessNotification>}
@@ -131,7 +131,7 @@ export default function SignUpForm() {
           </div>
           <div className="flex flex-col mb-4">
             <Link href="/login">
-              <a className="text-white text-md">Already have one? Login</a>
+              <a className="text-white text-md transition duration-120 hover:text-violet-500">Already have one? Login</a>
             </Link>
           </div>
           <div className="flex flex-row">

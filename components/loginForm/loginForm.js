@@ -3,15 +3,13 @@ import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '../context/authContext'
-import { doc, setDoc, getDoc } from "firebase/firestore"
-import { db } from '../../config/firebase'
 import DangerNotification from '../ui/notfications/dangerNotification'
 import SuccessNotification from '../ui/notfications/successNotification'
 import LoadingNotification from '../ui/notfications/loadingNotification'
 
 export default function LoginForm() {
 
-  const { user, login } = useAuth()
+  const { login } = useAuth()
   const router = useRouter()
 
   const [email, setEmail] = useState('')
@@ -60,8 +58,8 @@ export default function LoginForm() {
 
   return (
     <Fragment>
-      <div className="flex self-start ml-12 text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
-        <Link href="/">{`< Return`}</Link>
+      <div className="flex self-start ml-12 text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-200 hover:bg-violet-400">
+        <Link href="/">Return</Link>
       </div>
       {error && <DangerNotification>{error}</DangerNotification>}
       {success && <SuccessNotification>{success}</SuccessNotification>}
@@ -79,10 +77,10 @@ export default function LoginForm() {
           </div>
           <div className="flex flex-col mb-4">
             <Link href="/signup">
-              <a className="text-white text-md">Create a new account here</a>
+              <a className="text-white text-md transition duration-120 hover:text-violet-400">Create a new account here</a>
             </Link>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center ">
             <SuccessBtn>Login</SuccessBtn>
           </div>
         </form>
