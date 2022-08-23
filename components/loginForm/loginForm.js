@@ -36,7 +36,6 @@ export default function LoginForm() {
       setLoading(true)
       await login(email, password)
       setLoading(false)
-      setSuccess('Account created successfully')
       setInterval(() => {
         setSuccess('')
       }, 3000)
@@ -61,7 +60,7 @@ export default function LoginForm() {
 
   return (
     <Fragment>
-      <div className="flex self-start ml-12 text-white text-lg">
+      <div className="flex self-start ml-12 text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
         <Link href="/">{`< Return`}</Link>
       </div>
       {error && <DangerNotification>{error}</DangerNotification>}
