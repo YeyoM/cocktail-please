@@ -58,13 +58,15 @@ export default function ManageAccount() {
         <Link href="/random">{`< Return`}</Link>
       </div>
       <div className="max-h-full min-h-fit w-4/5 mt-8 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
-        <h1 className="text-white text-5xl mb-10 mt-4">Hello {name}!</h1>
-        <div className="w-full flex flex-col items-center">
-          <div className="text-white text-center text-md mb-2">Your email is <p className="text-violet-900">{email}</p></div>
-          <div className="text-white text-center text-md mb-2">The day set to recieve your random cocktail is: <p className="text-violet-900">{day}</p></div>
-          <div className="text-white text-center text-md mb-12">Your random cocktail will appear on: <p className="text-violet-900">{nextCocktail}</p></div>
-          <DangerBtn onClick={handleLogout} >Logout</DangerBtn>
-        </div>
+        <form onSubmit={handleLogout}>
+          <h1 className="text-white text-5xl mb-10 mt-4">Hello {name}!</h1>
+          <div className="w-full flex flex-col items-center">
+            <div className="text-white text-center text-md mb-2">Your email is <p className="text-violet-900">{email}</p></div>
+            <div className="text-white text-center text-md mb-2">The day set to recieve your random cocktail is: <p className="text-violet-900">{day}</p></div>
+            <div className="text-white text-center text-md mb-12">Your random cocktail will appear on: <p className="text-violet-900">{nextCocktail}</p></div>
+            <DangerBtn >Logout</DangerBtn>
+          </div>
+        </form>
       </div>
     </Fragment>
   )
