@@ -24,10 +24,7 @@ export default function ConfigureAccount() {
   const [day, setDay] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [loading, setLoading] = useState(false)  
-  const [nextStartDay, setNextStartDay] = useState('')
-  const [nextEndDay, setEndStartDay] = useState('')
-
+  const [loading, setLoading] = useState(false)   
 
   const handleDayChange = (e) => {
     setDay(e.target.value)
