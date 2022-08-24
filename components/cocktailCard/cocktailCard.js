@@ -31,6 +31,22 @@ export default function CocktailCard() {
     }
   }, [user, router])
 
+  useEffect(() => {
+    // tomar los datos de la base de datos para saber que dia toca el siguiente cocktail
+    // si el dia de hoy es el mismo que el dia que toca el siguiente cocktail, entonces
+    // hacer la llamada a la api y mostrar el resultado y guardar el id del cocktail en la base de datos
+    // si el dia de hoy no es el mismo que el dia que toca el siguiente cocktail, entonces
+    // mostrar el cocktail que esta guardado en la base de datos
+    if (true) {
+      const getDrink = async () => {
+        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+        const data = await response.json()
+        console.log(data.drinks[0])
+      }
+      getDrink()
+    }
+  }, [])
+
   const [cocktail, setCocktail] = useState(exampleResponse.drinks[0])
   const [ingredients, setIngredients] = useState([])
   const [measures, setMeasures] = useState([])
