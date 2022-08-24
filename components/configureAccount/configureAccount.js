@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useAuth } from '../context/authContext'
 import { doc, setDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
+import getNextDay from '../../helpers/getNextDay'
 
 export default function ConfigureAccount() {
 
@@ -23,6 +24,7 @@ export default function ConfigureAccount() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)  
+  const [nextDay, setNextDay] = useState('')
 
   const handleDayChange = (e) => {
     setDay(e.target.value)
@@ -38,12 +40,15 @@ export default function ConfigureAccount() {
       }, 5000)
       return
     }
+
+    setNextDay(getNextDay(day))
   
     try {
       setError('')
       setLoading(true)
       await setDoc(doc(db, 'users', user.uid), {
-        day
+        randomCocktailDay: day,
+        nextCocktailDate: nextDay
       }, { merge: true })
       setLoading(false)
       setSuccess('Day saved')

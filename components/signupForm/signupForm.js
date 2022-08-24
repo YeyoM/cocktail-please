@@ -64,7 +64,7 @@ export default function SignUpForm() {
         password: password,
         randomCocktailDay: '',
         currentCocktail: '',
-        nextCocktail: '',
+        nextCocktailDate: '',
         isAdmin: false,
         isBanned: false,
       })
