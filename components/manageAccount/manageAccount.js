@@ -5,7 +5,9 @@ import { useAuth } from '../context/authContext'
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
 import DangerBtn from '../ui/buttons/dangerBtn'
-import getNextDay from '../../helpers/getNextDay'
+import getStartNextDay from '../../helpers/getStartNextDay'
+import getEndNextDay from '../../helpers/getEndNextDay'
+import dateToHumanReadableDate from '../../helpers/dateToHumanReadableDate'
 
 export default function ManageAccount() {
 
@@ -16,7 +18,8 @@ export default function ManageAccount() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [day, setDay] = useState('')
-  const [nextDay, setNextDay] = useState('')
+  const [startNext, setStartNext] = useState('')
+  const [endNext, setEndNext] = useState('')
 
   useEffect(() => {
     if (!user) {
@@ -29,6 +32,7 @@ export default function ManageAccount() {
           setUserDoc(docSnap.data())
         } else {
           console.log('No such document!')
+          router.push('/login')
         }
       }
       getUserDoc()
@@ -46,20 +50,19 @@ export default function ManageAccount() {
   useEffect(() => {
     if (day) {
       const updateNextCocktail = async () => {
-        const nextDay = getNextDay(day)
-        setNextDay(nextDay)
+        const nextStartDay = getStartNextDay(day)
         await setDoc(doc(db, 'users', user.uid), {
-          nextCocktailDate: nextDay
+          nextStartCocktailDate: nextStartDay
+        }, { merge: true })
+        setStartNext(dateToHumanReadableDate(nextStartDay))
+        const nextEndDay = getEndNextDay(nextStartDay)
+        await setDoc(doc(db, 'users', user.uid), {
+          nextEndCocktailDate: nextEndDay
         }, { merge: true })
       }
       updateNextCocktail()
-      // const nextDay = day.getDate();
-      // const nextMonth = day.getMonth() + 1;
-      // const nextYear = day.getFullYear();
-      // const nextCocktailDate = `${nextDay}/${nextMonth}/${nextYear}`
-      // setNextDay(nextDay.toString())
     }
-  }, [day, user, nextDay])
+  }, [day, user])
 
   const handleLogout = async () => {
     try {
@@ -81,7 +84,7 @@ export default function ManageAccount() {
           <div className="w-full flex flex-col items-center">
             <div className="text-white text-center text-md mb-2">Your email is <p className="text-violet-900">{email}</p></div>
             <div className="text-white text-center text-md mb-2">The day set to recieve your random cocktail is: <p className="text-violet-900">{day}</p></div>
-            <div className="text-white text-center text-md mb-12">Your random cocktail will appear on: <p className="text-violet-900">{nextDay}</p></div>
+            <div className="text-white text-center text-md mb-12">Your random cocktail will appear on: <p className="text-violet-900">{startNext}</p></div>
             <DangerBtn >Logout</DangerBtn>
           </div>
         </form>

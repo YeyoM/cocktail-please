@@ -2,6 +2,7 @@ export default function getNextDay (dayName){
 
 	// The current day
 	let date = new Date();
+	date.setHours(0,0,0,0);
 	let now = date.getDay();
 
 	// Days of the week
@@ -19,14 +20,5 @@ export default function getNextDay (dayName){
 	let nextDayTimestamp = date.getTime() + (1000 * 60 * 60 * 24 * diff);
 
 	// Get the next day
-	const nextDate = new Date(nextDayTimestamp);
-
-  // Format the date
-  const nextdDay = nextDate.getDate();
-  const nextMonth = nextDate.getMonth() + 1;
-  const nextYear = nextDate.getFullYear();
-
-  // Return the date
-  return `${nextMonth}/${nextdDay}/${nextYear}`;
-
+	return new Date(nextDayTimestamp)
 }

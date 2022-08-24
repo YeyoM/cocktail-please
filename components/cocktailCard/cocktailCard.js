@@ -21,7 +21,7 @@ export default function CocktailCard() {
       let day = ''
       const userDoc = getDoc(doc(db, 'users', user.uid))
       userDoc.then((doc) => {
-        day = doc._document.data.value.mapValue.fields.day.stringValue
+        day = doc._document.data.value.mapValue.fields.randomCocktailDay.stringValue
         if (!day) {
           router.push('/configure')
         }
