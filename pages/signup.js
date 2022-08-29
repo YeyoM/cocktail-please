@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Fragment } from 'react'
-import SignUpForm from '../components/signupForm/SignupForm'
+import SignupForm from '../components/signupForm/SignupForm'
 
 export default function Signup() {
   return (
@@ -9,7 +9,7 @@ export default function Signup() {
           <title>Sign Up</title>
           <meta name="description" content="Cocktail Please! Sign Up Form"/>
         </Head>
-      <SignUpForm />
+      <SignupForm />
     </Fragment>
   )
 }

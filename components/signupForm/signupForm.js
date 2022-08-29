@@ -9,7 +9,7 @@ import DangerNotification from '../ui/notfications/dangerNotification'
 import SuccessNotification from '../ui/notfications/successNotification'
 import LoadingNotification from '../ui/notfications/loadingNotification'
 
-export default function SignUpForm() {
+export default function SignupForm() {
 
   const { signUp } = useAuth()
   const router = useRouter()
