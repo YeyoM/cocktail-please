@@ -5,7 +5,7 @@ class myDocument extends Document {
   render () {
     return <Html lang='en'>
       <Head>
-        <link rel="icon" href="/icon.svg" />
+        <link rel="icon" href="/cocktail.svg" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="theme-color" content="#5a1d85" />

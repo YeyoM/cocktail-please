@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "boring-avatars": "^1.7.0",
-    "dotenv": "^16.0.1",
-    "firebase": "^9.9.3",
+    "boring-avatars": "1.7.0",
+    "dotenv": "16.0.1",
+    "firebase": "9.9.3",
     "next": "12.1.6",
+    "next-pwa": "5.5.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "uid": "^2.0.0"
+    "uid": "2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
