@@ -196,43 +196,46 @@ export default function CocktailCard() {
 
   return (
     <Fragment>
-      <div className="flex self-end mr-12 mt-8 text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
-        <Link href="/account">{`Manage my Account`}</Link>
+      <Fragment>
+        <div className="max-h-full min-h-fit w-4/5 mb-6 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
+          {
+            cocktail ?
+            <div className="flex flex-col items-center">
+                <div className="w-2/3 rounded-full overflow-hidden border-4 border-white mt-4">
+                  <Image src={cocktail.strDrinkThumb} alt="cocktail" width={100} height={100} layout="responsive" />
+                </div>
+                <h1 className="text-5xl mt-3 text-white">{cocktail.strDrink}</h1>
+                <h2 className="text-2xl mt-5 text-white">Ingredients</h2>
+                <ul className="mt-2 flex flex-col items-center">
+                  {
+                    ingredients.map((ingredient, index) => {
+                      return (
+                        <li key={index} className="text-white">
+                          <p className="text-sm">{ingredient} - {measures[index]}</p> 
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+                <h2 className="text-2xl mt-5 text-white">Instructions</h2>
+                <div className="mt-2 w-[220px]">
+                  <p className="text-white text-center text-sm">For {cocktail.strGlass}. {cocktail.strInstructions}</p>
+                </div>
+                <h3 className="text-xl mt-5 text-white">Additional Information</h3>
+                <div className="mt-2 w-[220px]">
+                  <p className="text-white text-center text-sm">{cocktail.strAlcoholic}</p>
+                  <p className="text-white text-center text-sm">{cocktail.strTags}</p>
+                </div>
+              </div>
+            : <div className="flex flex-col items-center min-h-[30rem] justify-center">
+                <h1 className="text-5xl mt-3 text-white">Loading...</h1>
+              </div>
+          }
+        </div>
+      </Fragment>
+      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
+        <Link href="/account">{`Manage My Account`}</Link>
       </div>
-      {
-        cocktail ?
-        <Fragment>
-          <div className="max-h-full min-h-fit w-4/5 mt-8 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
-            <div className="w-2/3 rounded-full overflow-hidden border-4 border-white mt-4">
-              <Image src={cocktail.strDrinkThumb} alt="cocktail" width={100} height={100} layout="responsive" />
-            </div>
-            <h1 className="text-5xl mt-3 text-white">{cocktail.strDrink}</h1>
-            <h2 className="text-2xl mt-5 text-white">Ingredients</h2>
-            <ul className="mt-2 flex flex-col items-center">
-              {
-                ingredients.map((ingredient, index) => {
-                  return (
-                    <li key={index} className="text-white">
-                      <p className="text-sm">{ingredient} - {measures[index]}</p> 
-                    </li>
-                  )
-                })
-              }
-            </ul>
-            <h2 className="text-2xl mt-5 text-white">Instructions</h2>
-            <div className="mt-2 w-[220px]">
-              <p className="text-white text-center text-sm">For {cocktail.strGlass}. {cocktail.strInstructions}</p>
-            </div>
-            <h3 className="text-xl mt-5 text-white">Additional Information</h3>
-            <div className="mt-2 w-[220px]">
-              <p className="text-white text-center text-sm">{cocktail.strAlcoholic}</p>
-              <p className="text-white text-center text-sm">{cocktail.strTags}</p>
-            </div>
-          </div>
-        </Fragment>
-        : null
-      }
-      
     </Fragment>
   )
 }

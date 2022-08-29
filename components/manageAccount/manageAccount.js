@@ -76,30 +76,32 @@ export default function ManageAccount() {
 
   return (
     <Fragment>
-      <div className="flex self-start ml-12 mt-2 text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
-        <Link href="/random">{`< Return`}</Link>
-      </div>
-      <div className="max-h-full min-h-fit w-4/5 mt-8 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden mb-10">
+      <div className="max-h-full min-h-fit w-4/5 mt-4 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden mb-4 justify-center">
         <form onSubmit={handleLogout}>
-          <h1 className="text-white text-center text-5xl mb-6 mt-6">Hello {name}!</h1>
           {userDoc 
             ? <div className="flex flex-col items-center p-2">
-                <div className="flex flex-col items-center mb-6">
+                <h1 className="text-white text-center text-5xl mb-4 mt-4">Hello {name}!</h1>
+                <div className="flex flex-col items-center mb-4">
                   <Avatar
                     size={200}
                     name={name}
                     variant="beam"
                     colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
                   />
-                  <div className="text-white text-center text-xl mt-4">Your email: <p className="text-violet-900">{email}</p></div>
-                  <div className="text-white text-center text-xl mt-4">Your random cocktail day: <p className="text-violet-900">{day}</p></div>
-                  <div className="text-white text-center text-xl mt-4">Your random cocktail will appear on: <p className='text-violet-900'>{startNext}</p></div>
+                  <div className="text-white text-center text-xl mt-3">Your email: <p className="text-violet-900">{email}</p></div>
+                  <div className="text-white text-center text-xl mt-3">Your random cocktail day: <p className="text-violet-900">{day}</p></div>
+                  <div className="text-white text-center text-xl mt-3">Your random cocktail will appear on: <p className='text-violet-900'>{startNext}</p></div>
                 </div>
                 <DangerBtn>Logout</DangerBtn>
               </div>
-            : <p className="text-white text-center text-2xl mt-4">Loading...</p>
+            : <div className="flex flex-col items-center min-h-[30rem] justify-center">
+                <h1 className="text-5xl mt-3 text-white">Loading...</h1>
+              </div>
           } 
         </form>
+      </div>
+      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
+        <Link href="/random">{`Return To My Cocktail`}</Link>
       </div>
     </Fragment>
   )

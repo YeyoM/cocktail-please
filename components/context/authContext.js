@@ -43,8 +43,8 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   const logout = async () => {
-    setUser(null)
     await signOut(auth)
+    setUser(null)
   }
 
   return (
