@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Fragment } from 'react'
-import SignUpForm from '../components/signupForm/SignUpForm'
+import SignUpForm from '../components/signupForm/SignupForm'
 
 export default function Signup() {
   return (
