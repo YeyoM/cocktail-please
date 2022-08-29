@@ -14,6 +14,12 @@ export default function getNextDay (dayName){
 	// Find the difference between the current day and the one you want
 	// If it's the same day as today (or a negative number), jump to the next week
 	let diff = day - now;
+
+	if (diff === 0) {
+		let a =	date.getTime()
+		return new Date(a)
+	}
+
 	diff = diff < 1 ? 7 + diff : diff;
 
 	// Get the timestamp for the desired day
