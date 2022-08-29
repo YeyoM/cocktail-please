@@ -68,7 +68,6 @@ export default function ManageAccount() {
   const handleLogout = async () => {
     try {
       await logout()
-      router.push('/')
     } catch (err) {
       console.log(err)
     }
@@ -95,13 +94,15 @@ export default function ManageAccount() {
                 <DangerBtn>Logout</DangerBtn>
               </div>
             : <div className="flex flex-col items-center min-h-[30rem] justify-center">
-                <h1 className="text-5xl mt-3 text-white">Loading...</h1>
+                <div className="loader">Loading...</div>
               </div>
           } 
         </form>
       </div>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
-        <Link href="/random">{`Return To My Cocktail`}</Link>
+      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
+        <Link href="/random">
+          <a className="inline-block w-full h-full text-center">{`Return to cocktail`}</a>
+        </Link>
       </div>
     </Fragment>
   )

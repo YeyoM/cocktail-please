@@ -61,7 +61,7 @@ export default function LoginForm() {
       {error && <DangerNotification>{error}</DangerNotification>}
       {success && <SuccessNotification>{success}</SuccessNotification>}
       {loading && <LoadingNotification>Loading...</LoadingNotification>}
-      <div className="max-h-full min-h-fit w-5/6 mb-2 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
+      <div className="max-h-full min-h-fit w-4/5 mb-2 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
         <form className="w-3/4" onSubmit={handleSubmit}>
           <h1 className="text-white text-5xl mt-10 mb-12">Login to your account</h1>
           <div className="flex flex-col">
@@ -82,8 +82,10 @@ export default function LoginForm() {
           </div>
         </form>
       </div>
-      <div className="w-5/6 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400">
-        <Link href="/">{`Return to home`}</Link>
+      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
+        <Link href="/">
+          <a className="inline-block w-full h-full text-center">{`Return to home`}</a>
+        </Link>
       </div>
     </Fragment>
   )
