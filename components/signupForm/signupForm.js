@@ -1,7 +1,7 @@
 import SuccessBtn from '../ui/buttons/successBtn'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useAuth } from '../context/authContext'
 import { doc, setDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
@@ -11,7 +11,7 @@ import LoadingNotification from '../ui/notfications/loadingNotification'
 
 export default function SignupForm() {
 
-  const { signUp } = useAuth()
+  const { user, signUp } = useAuth()
   const router = useRouter()
 
   const [name, setName] = useState('')
@@ -22,6 +22,12 @@ export default function SignupForm() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      router.push('/random')
+    }
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault()

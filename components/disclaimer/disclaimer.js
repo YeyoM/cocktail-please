@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import { Fragment } from 'react'
+import { useAuth } from '../context/authContext'
 
 export default function Disclaimer() {
+
+  const { user } = useAuth()
+
   return (
     <Fragment>
       <div className="flex flex-col items-center text-white w-3/4 pt-10 pb-6">
@@ -13,11 +17,21 @@ export default function Disclaimer() {
             Government warning: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems. Drink responsibly.</p>
         <p>In consideration for your being given access to the Site, you hereby release, waive, discharge and covenant not to sue the Company, subsidiaries, DBAs, affiliates, successors, contractors, agents, representatives and/or employees from any and all liability, claims, demands, actions and causes of action whatsoever arising out of or relating to any damage to your property or loss, damage or injury that you personally sustain, including death, whether caused by the negligence of the Company or its representatives or not while participating in Company programs, using Site content and/or attending Company Events in person, regardless of location. You hereby assume all risks to your property and your person and in no way will the Company be liable to you for damages or injuries you sustain.</p>
       </div>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
-        <Link href="/">
-          <a className="inline-block w-full h-full text-center">{`Return to home`}</a>
-        </Link>
-      </div>
+      {
+        user ? (
+          <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
+          <Link href="/account">
+            <a className="inline-block w-full h-full text-center">{`Return to my Account`}</a>
+          </Link>
+        </div>
+        ) : (
+          <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
+          <Link href="/">
+            <a className="inline-block w-full h-full text-center">{`Return to home`}</a>
+          </Link>
+        </div>
+        )
+      }
     </Fragment>
   )
 }

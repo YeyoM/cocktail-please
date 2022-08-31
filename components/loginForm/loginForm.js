@@ -1,6 +1,6 @@
 import SuccessBtn from '../ui/buttons/successBtn'
 import Link from 'next/link'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '../context/authContext'
 import DangerNotification from '../ui/notfications/dangerNotification'
@@ -9,7 +9,7 @@ import LoadingNotification from '../ui/notfications/loadingNotification'
 
 export default function LoginForm() {
 
-  const { login } = useAuth()
+  const { user, login } = useAuth()
   const router = useRouter()
 
   const [email, setEmail] = useState('')
@@ -17,6 +17,12 @@ export default function LoginForm() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState('')
+
+  useEffect(() => {
+    if (user) {
+      router.push('/random')
+    }
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
