@@ -3,7 +3,7 @@ import React from 'react'
 
 class myDocument extends Document {
   render () {
-    return <Html lang='en'>
+    return <Html lang='en' className='scrollbar-hide'>
       <Head>
         <link rel="icon" href="/cocktail.svg" />
         <link rel="manifest" href="/manifest.json" />
