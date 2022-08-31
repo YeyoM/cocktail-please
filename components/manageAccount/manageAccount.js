@@ -80,16 +80,16 @@ export default function ManageAccount() {
           {userDoc 
             ? <div className="flex flex-col items-center p-2">
                 <h1 className="text-white text-center text-5xl mb-4 mt-4">Hello {name}!</h1>
-                <div className="flex flex-col items-center mb-4">
+                <div className="flex flex-col items-center mb-2">
                   <Avatar
                     size={200}
                     name={name}
                     variant="beam"
                     colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
                   />
-                  <div className="text-white text-center text-xl mt-3">Your email: <p className="text-violet-900">{email}</p></div>
-                  <div className="text-white text-center text-xl mt-3">Your random cocktail day: <p className="text-violet-900">{day}</p></div>
-                  <div className="text-white text-center text-xl mt-3">Your random cocktail will appear on: <p className='text-violet-900'>{startNext}</p></div>
+                  <div className="text-white text-center text-xl mt-5">Your email: <p className="text-violet-900 break-all">{email}</p></div>
+                  <div className="text-white text-center text-xl mt-1">Your random cocktail day: <p className="text-violet-900">{day}</p></div>
+                  <div className="text-white text-center text-xl mt-1">Your random cocktail will appear on: <p className='text-violet-900'>{startNext}</p></div>
                 </div>
                 <DangerBtn>Logout</DangerBtn>
               </div>
@@ -99,7 +99,7 @@ export default function ManageAccount() {
           } 
         </form>
       </div>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-4 relative">
+      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-orange-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-orange-400 mb-4 relative">
         <Link href="/random">
           <a className="inline-block w-full h-full text-center">{`Return to cocktail`}</a>
         </Link>

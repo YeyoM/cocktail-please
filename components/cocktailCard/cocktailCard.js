@@ -204,7 +204,7 @@ export default function CocktailCard() {
                 <div className="w-2/3 rounded-full overflow-hidden border-4 border-white mt-4">
                   <Image src={cocktail.strDrinkThumb} alt="cocktail" width={100} height={100} layout="responsive" />
                 </div>
-                <h1 className="text-5xl mt-3 text-white">{cocktail.strDrink}</h1>
+                <h1 className="text-5xl mt-3 text-violet-900">{cocktail.strDrink}</h1>
                 <h2 className="text-3xl mt-5 text-white">Ingredients</h2>
                 <ul className="mt-2 flex flex-col items-center">
                   {
@@ -233,7 +233,7 @@ export default function CocktailCard() {
           }
         </div>
       </Fragment>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
+      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-orange-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-orange-400 mb-6 relative">
         <Link href="/account">
           <a className="inline-block w-full h-full text-center">{`Manage my Account`}</a>
         </Link>

@@ -67,7 +67,7 @@ export default function LoginForm() {
       {error && <DangerNotification>{error}</DangerNotification>}
       {success && <SuccessNotification>{success}</SuccessNotification>}
       {loading && <LoadingNotification>Loading...</LoadingNotification>}
-      <div className="max-h-full min-h-fit w-4/5 mb-2 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
+      <div className="max-h-full min-h-fit w-4/5 mb-4 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
         <form className="w-3/4" onSubmit={handleSubmit}>
           <h1 className="text-white text-5xl mt-10 mb-12">Login to your account</h1>
           <div className="flex flex-col">
