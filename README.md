@@ -57,7 +57,7 @@ Lofi Terminal - [https://github.com/YeyoM/cocktail-please](https://github.com/Ye
 [license-url]: https://github.com/YeyoM/lofi_code/blob/main/LICENCE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/diego-emilio-moreno-sanchez/
-[product-screenshot]: public/project-screenshot.png
+[product-screenshot]: public/project-screenshot.jpeg
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
