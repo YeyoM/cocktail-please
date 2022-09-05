@@ -67,7 +67,6 @@ export default function SignupForm() {
       await setDoc(doc(db, "users", user.user.uid), {
         name: name,
         email: email,
-        password: password,
         randomCocktailDay: '',
         currentCocktail: '',
         isAdmin: false,

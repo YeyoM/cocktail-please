@@ -5,10 +5,11 @@ import Link from 'next/link'
 import { useAuth } from '../context/authContext'
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
-import RandomCocktailBtn from '../ui/buttons/randomCocktailBtn'
 import fetchRandomCocktail from "../../helpers/fetchRandomCocktail"
 import fetchCocktailById from "../../helpers/fetchCocktailById"
 import getComparableDate from "../../helpers/getComparableDate"
+import getStartNextDay from '../../helpers/getStartNextDay'
+import getEndNextDay from '../../helpers/getEndNextDay'
 
 export default function CocktailCard() {
 
@@ -66,8 +67,29 @@ export default function CocktailCard() {
             setLoading(false)
           })
       } else if (userInfo.currentCocktail.stringValue) {
+
         const today = new Date()
+        const lastSeenDb = new Date(userInfo.lastSeen.stringValue)
+        const nextEndCocktailDateDb = new Date(userInfo.nextEndCocktailDate.timestampValue.split('T')[0])
+
         const todayComparable = getComparableDate(today)
+
+        if (lastSeenDb < nextEndCocktailDateDb && nextEndCocktailDateDb < today) {
+          fetchRandomCocktail()
+            .then(data => {
+              setCocktail(data)
+              setDoc(doc(db, 'users', user.uid), {
+                currentCocktail: data.idDrink,
+                lastRandomCocktailDate: todayComparable
+              }, { merge: true })
+              setLoading(false)
+            })
+            .catch(err => {
+              setError(err)
+              setLoading(false)
+            })
+        }
+
         const dbDate = userInfo.nextStartCocktailDate.timestampValue.split('T')[0]
         
         if (todayComparable === dbDate) {
@@ -114,6 +136,19 @@ export default function CocktailCard() {
             })
         }
       }
+      // register last seen
+      let date = new Date()
+      let now = getComparableDate(date)
+      setDoc(doc(db, 'users', user.uid), {
+        lastSeen: now
+      }, { merge: true })
+      const nextStartDay = getStartNextDay(userInfo.randomCocktailDay.stringValue)
+      const nextEndDay = getEndNextDay(nextStartDay)
+      setDoc(doc(db, 'users', user.uid), {
+        nextStartCocktailDate: nextStartDay,
+        nextEndCocktailDate: nextEndDay
+      }, { merge: true })
+
     }
   }, [userInfo, user])
 
