@@ -9,6 +9,7 @@ import { doc, setDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
 import getStartNextDay from '../../helpers/getStartNextDay'
 import getEndNextDay from '../../helpers/getEndNextDay'
+import PrimaryCard from "../ui/cards/primaryCard"
 
 export default function ConfigureAccount() {
 
@@ -73,7 +74,7 @@ export default function ConfigureAccount() {
       {error && <DangerNotification>{error}</DangerNotification>}
       {success && <SuccessNotification>{success}</SuccessNotification>}
       {loading && <LoadingNotification>Loading...</LoadingNotification>}
-      <div className="max-h-full min-h-fit w-5/6 mt-8 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
+      <PrimaryCard>
         <form className="w-3/4" onSubmit={handleSubmit}>
           <h1 className="text-white text-3xl mt-10 mb-12">Select a day to recieve your weekly random cocktail!</h1>
           <div onChange={handleDayChange}>
@@ -113,7 +114,7 @@ export default function ConfigureAccount() {
           </div>
           <p className="text-white mb-4 text-sm text-center">We suggest you to select a weekend day, choose wisely :)</p>
         </form>
-      </div>
+      </PrimaryCard>
     </Fragment>
   )
 }

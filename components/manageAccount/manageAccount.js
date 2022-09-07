@@ -12,6 +12,7 @@ import Avatar from "boring-avatars"
 import RedirectPrimaryBtn from '../ui/buttons/redirectPrimaryBtn'
 import RedirectSecondaryBtn from '../ui/buttons/redirectSecondaryBtn'
 import DangerNotification from '../ui/notfications/dangerNotification'
+import SecondaryCard from '../ui/cards/secondaryCard'
 
 export default function ManageAccount() {
 
@@ -90,7 +91,7 @@ export default function ManageAccount() {
   return (
     <Fragment>
       {error && <DangerNotification>{error}</DangerNotification>}
-      <div className="max-h-full min-h-fit w-4/5 mt-4 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden mb-4 justify-center">
+      <SecondaryCard>
         <form onSubmit={handleLogout}>
           {userDoc 
             ? <div className="flex flex-col items-center p-2">
@@ -113,7 +114,7 @@ export default function ManageAccount() {
               </div>
           } 
         </form>
-      </div>
+      </SecondaryCard>
       <RedirectPrimaryBtn href="/random">Return to cocktail</RedirectPrimaryBtn>
       <RedirectSecondaryBtn href="/disclaimer">Disclaimer</RedirectSecondaryBtn>
     </Fragment>

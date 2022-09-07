@@ -12,6 +12,7 @@ import getStartNextDay from '../../helpers/getStartNextDay'
 import getEndNextDay from '../../helpers/getEndNextDay'
 import DangerNotification from '../ui/notfications/dangerNotification'
 import RedirectPrimaryBtn from "../ui/buttons/redirectPrimaryBtn"
+import SecondaryCard from "../ui/cards/secondaryCard"
 
 export default function CocktailCard() {
 
@@ -233,7 +234,7 @@ export default function CocktailCard() {
         {
           error ? <DangerNotification>{error}</DangerNotification> : null
         }
-        <div className="max-h-full min-h-fit w-4/5 mb-6 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
+        <SecondaryCard>
           {
             cocktail ?
             <div className="flex flex-col items-center">
@@ -267,7 +268,7 @@ export default function CocktailCard() {
                 <div className="loader">Loading...</div>
               </div>
           }
-        </div>
+        </SecondaryCard>
       </Fragment>
       <RedirectPrimaryBtn href="/account">Manage My Account</RedirectPrimaryBtn>
     </Fragment>

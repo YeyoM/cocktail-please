@@ -7,6 +7,7 @@ import DangerNotification from '../ui/notfications/dangerNotification'
 import SuccessNotification from '../ui/notfications/successNotification'
 import LoadingNotification from '../ui/notfications/loadingNotification'
 import RedirectSecondaryBtn from '../ui/buttons/redirectSecondaryBtn'
+import PrimaryCard from '../ui/cards/primaryCard'
 
 export default function LoginForm() {
 
@@ -68,7 +69,7 @@ export default function LoginForm() {
       {error && <DangerNotification>{error}</DangerNotification>}
       {success && <SuccessNotification>{success}</SuccessNotification>}
       {loading && <LoadingNotification>Loading...</LoadingNotification>}
-      <div className="max-h-full min-h-fit w-4/5 mb-4 bg-orange-300 p-4 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
+      <PrimaryCard>
         <form className="w-3/4" onSubmit={handleSubmit}>
           <h1 className="text-white text-5xl mt-10 mb-12">Login to your account</h1>
           <div className="flex flex-col">
@@ -88,7 +89,7 @@ export default function LoginForm() {
             <SuccessBtn>Login</SuccessBtn>
           </div>
         </form>
-      </div>
+      </PrimaryCard>
       <RedirectSecondaryBtn href="/">Return to home</RedirectSecondaryBtn>
     </Fragment>
   )
