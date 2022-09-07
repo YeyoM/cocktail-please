@@ -9,6 +9,9 @@ import getStartNextDay from '../../helpers/getStartNextDay'
 import getEndNextDay from '../../helpers/getEndNextDay'
 import dateToHumanReadableDate from '../../helpers/dateToHumanReadableDate'
 import Avatar from "boring-avatars"
+import RedirectPrimaryBtn from '../ui/buttons/redirectPrimaryBtn'
+import RedirectSecondaryBtn from '../ui/buttons/redirectSecondaryBtn'
+import DangerNotification from '../ui/notfications/dangerNotification'
 
 export default function ManageAccount() {
 
@@ -20,7 +23,7 @@ export default function ManageAccount() {
   const [email, setEmail] = useState('')
   const [day, setDay] = useState('')
   const [startNext, setStartNext] = useState('')
-  const [endNext, setEndNext] = useState('')
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!user) {
@@ -29,6 +32,10 @@ export default function ManageAccount() {
       const getUserDoc = async () => {
         const docRef = doc(db, 'users', user.uid)
         const docSnap = await getDoc(docRef)
+          .catch(err => {
+            setError("Error getting user document: ", err)
+            console.log(err)
+          })
         if (docSnap.exists()) {
           setUserDoc(docSnap.data())
         } else {
@@ -54,12 +61,18 @@ export default function ManageAccount() {
         const nextStartDay = getStartNextDay(day)
         await setDoc(doc(db, 'users', user.uid), {
           nextStartCocktailDate: nextStartDay
-        }, { merge: true })
+        }, { merge: true }).catch(err => {
+          setError("Error updating user document: ", err)
+          console.log(err)
+        })
         setStartNext(dateToHumanReadableDate(nextStartDay))
         const nextEndDay = getEndNextDay(nextStartDay)
         await setDoc(doc(db, 'users', user.uid), {
           nextEndCocktailDate: nextEndDay
-        }, { merge: true })
+        }, { merge: true }).catch(err => {
+          setError("Error updating user document: ", err)
+          console.log(err)
+        })
       }
       updateNextCocktail()
     }
@@ -69,12 +82,14 @@ export default function ManageAccount() {
     try {
       await logout()
     } catch (err) {
+      setError("Error logging out: ", err)
       console.log(err)
     }
   }
 
   return (
     <Fragment>
+      {error && <DangerNotification>{error}</DangerNotification>}
       <div className="max-h-full min-h-fit w-4/5 mt-4 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden mb-4 justify-center">
         <form onSubmit={handleLogout}>
           {userDoc 
@@ -99,16 +114,8 @@ export default function ManageAccount() {
           } 
         </form>
       </div>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-orange-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-orange-400 mb-4 relative">
-        <Link href="/random">
-          <a className="inline-block w-full h-full text-center">{`Return to cocktail`}</a>
-        </Link>
-      </div>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-violet-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-violet-400 mb-6 relative">
-        <Link href="/disclaimer">
-          <a className="inline-block w-full h-full text-center">{`Disclaimer`}</a>
-        </Link>
-      </div>
+      <RedirectPrimaryBtn href="/random">Return to cocktail</RedirectPrimaryBtn>
+      <RedirectSecondaryBtn href="/disclaimer">Disclaimer</RedirectSecondaryBtn>
     </Fragment>
   )
 }

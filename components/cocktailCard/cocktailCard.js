@@ -10,6 +10,8 @@ import fetchCocktailById from "../../helpers/fetchCocktailById"
 import getComparableDate from "../../helpers/getComparableDate"
 import getStartNextDay from '../../helpers/getStartNextDay'
 import getEndNextDay from '../../helpers/getEndNextDay'
+import DangerNotification from '../ui/notfications/dangerNotification'
+import RedirectPrimaryBtn from "../ui/buttons/redirectPrimaryBtn"
 
 export default function CocktailCard() {
 
@@ -36,17 +38,13 @@ export default function CocktailCard() {
           router.push('/configure')
         }
       }).catch(err => {
+        setError("Error getting user document: ", err)
         console.log(err)
       })
     }
   }, [user, router])
 
   useEffect(() => {
-    // tomar los datos de la base de datos para saber que dia toca el siguiente cocktail
-    // si el dia de hoy es el mismo que el dia que toca el siguiente cocktail, entonces
-    // hacer la llamada a la api y mostrar el resultado y guardar el id del cocktail en la base de datos
-    // si el dia de hoy no es el mismo que el dia que toca el siguiente cocktail, entonces
-    // mostrar el cocktail que esta guardado en la base de datos
 
     if (userInfo) {
       // en caso de que sea la primera vez que entra
@@ -232,6 +230,9 @@ export default function CocktailCard() {
   return (
     <Fragment>
       <Fragment>
+        {
+          error ? <DangerNotification>{error}</DangerNotification> : null
+        }
         <div className="max-h-full min-h-fit w-4/5 mb-6 bg-violet-300 p-5 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg flex flex-col items-center overflow-hidden">
           {
             cocktail ?
@@ -268,11 +269,7 @@ export default function CocktailCard() {
           }
         </div>
       </Fragment>
-      <div className="w-4/5 flex flex-col items-center  text-white text-lg p-2 bg-orange-300 rounded-xl bg-opacity-60 backdrop-filter backdrop-blur-lg duration-150 hover:bg-orange-400 mb-6 relative">
-        <Link href="/account">
-          <a className="inline-block w-full h-full text-center">{`Manage my Account`}</a>
-        </Link>
-      </div>
+      <RedirectPrimaryBtn href="/account">Manage My Account</RedirectPrimaryBtn>
     </Fragment>
   )
 }
