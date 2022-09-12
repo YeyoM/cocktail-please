@@ -46,12 +46,10 @@ export default function ConfigureAccount() {
       setError('')
       setLoading(true)
       const nextStartDay = getStartNextDay(day)
-      await setDoc(doc(db, 'users', user.uid), {
-        randomCocktailDay: day,
-        nextStartCocktailDate: nextStartDay
-      }, { merge: true })
       const nextEndDay = getEndNextDay(nextStartDay)
       await setDoc(doc(db, 'users', user.uid), {
+        randomCocktailDay: day,
+        nextStartCocktailDate: nextStartDay,
         nextEndCocktailDate: nextEndDay
       }, { merge: true })
       setLoading(false)

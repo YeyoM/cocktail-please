@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { Fragment, useState, useEffect } from "react"
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { useAuth } from '../context/authContext'
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from '../../config/firebase'
@@ -138,14 +137,12 @@ export default function CocktailCard() {
       // register last seen
       let date = new Date()
       let now = getComparableDate(date)
-      setDoc(doc(db, 'users', user.uid), {
-        lastSeen: now
-      }, { merge: true })
       const nextStartDay = getStartNextDay(userInfo.randomCocktailDay.stringValue)
       const nextEndDay = getEndNextDay(nextStartDay)
       setDoc(doc(db, 'users', user.uid), {
         nextStartCocktailDate: nextStartDay,
-        nextEndCocktailDate: nextEndDay
+        nextEndCocktailDate: nextEndDay,
+        lastSeen: now
       }, { merge: true })
 
     }
