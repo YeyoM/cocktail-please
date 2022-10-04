@@ -47,7 +47,7 @@ Distributed under the GNU GPLv3 License. See `LICENSE.txt` for more information.
 
 YeyoM - [@YeyoMoreno24](https://twitter.com/YeyoMoreno24) - yeyomoreno2003@hotmail.com
 
-Lofi Terminal - [https://github.com/YeyoM/cocktail-please](https://github.com/YeyoM/cocktail-please)
+Cocktail Please! - [https://github.com/YeyoM/cocktail-please](https://github.com/YeyoM/cocktail-please)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
